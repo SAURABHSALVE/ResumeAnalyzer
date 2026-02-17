@@ -22,12 +22,7 @@ Interactive, visually friendly README for the ResumeAnalyzer Django app — uplo
 
 ## Demo
 
-_Interactive demo area_
-
-<!-- Replace the following with an actual GIF or screenshot: -->
-![Demo placeholder](https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg)
-
-You can embed a short demo GIF (place the file under `docs/` or `media/` and reference it here).
+Run the app locally (see Quick Start) to try the upload and dashboard features. To include a demo GIF or screenshot, place the file under `docs/` or `media/` and reference it here.
 
 ---
 
@@ -77,14 +72,11 @@ Open http://127.0.0.1:8000/ in your browser.
 
 High-level flow:
 
-```mermaid
-flowchart LR
-  U[User uploads resume] --> S[Server (Django)]
-  S --> FS[Save to media/resumes]
-  S --> P[Parser / Analyzer]
-  P --> DB[Store extracted data]
-  DB --> UI[Dashboard / Download]
-```
+- User uploads resume -> Server (Django)
+- Server saves file to `media/resumes`
+- Server sends file to Parser/Analyzer
+- Parser extracts and stores data in the database
+- Dashboard retrieves and displays extracted data
 
 ---
 
