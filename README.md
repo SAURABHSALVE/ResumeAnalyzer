@@ -1,48 +1,130 @@
 # ResumeAnalyzer
 
-ResumeAnalyzer is a lightweight Django application to upload, store and analyze resumes. It provides a simple web UI to upload PDF/Word resumes and a backend that extracts/organizes resume data for further processing.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/) [![Repo Size](https://img.shields.io/github/repo-size/SAURABHSALVE/ResumeAnalyzer)](https://github.com/SAURABHSALVE/ResumeAnalyzer)
 
-## Features
-- Upload resumes (stored in `media/resumes`)
-- Simple analysis/views under the `analyzer` app
-- Example templates for upload and dashboard
+Interactive, visually friendly README for the ResumeAnalyzer Django app — upload, manage and analyze resumes quickly.
 
-## Quickstart
+---
+
+## Table of Contents
+
+- [Demo](#demo)
+- [Quick Start](#quick-start)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Environment & Secrets](#environment--secrets)
+- [Development](#development)
+- [Deploying](#deploying)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
+## Demo
+
+_Interactive demo area_
+
+<!-- Replace the following with an actual GIF or screenshot: -->
+![Demo placeholder](https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg)
+
+You can embed a short demo GIF (place the file under `docs/` or `media/` and reference it here).
+
+---
+
+## Quick Start
 
 1. Create and activate a Python virtual environment:
 
-   python -m venv .venv
-   .venv\\Scripts\\activate     # Windows
+```powershell
+python -m venv .venv
+.venv\Scripts\activate
+```
 
 2. Install dependencies:
 
-   pip install -r resume_analyzer\\requirements.txt
+```powershell
+pip install -r resume_analyzer\requirements.txt
+```
 
-3. Copy environment variables from `.env.example` to `.env` and set values (do NOT commit secrets):
+3. Copy `.env.example` to `.env` and set secrets locally (do NOT commit):
 
-   - Create a file `resume_analyzer\\.env` based on `resume_analyzer\\.env.example`.
-   - Set `OPENAI_API_KEY` or other service keys in your local `.env`.
+```powershell
+copy resume_analyzer\.env.example resume_analyzer\.env
+# edit resume_analyzer\.env and add values
+```
 
-4. Run migrations and start the development server:
+4. Run migrations and launch:
 
-   cd resume_analyzer
-   python manage.py migrate
-   python manage.py runserver
+```powershell
+cd resume_analyzer
+python manage.py migrate
+python manage.py runserver
+```
 
-5. Open `http://127.0.0.1:8000/` and use the app.
+Open http://127.0.0.1:8000/ in your browser.
 
-## Notes & Security
-- This repository previously contained sensitive keys in `resume_analyzer/.env`. Those secrets must be kept out of the repo. Use the local `.env` and add `.env` to `.gitignore` (already present in the project `.gitignore`).
-- Do NOT commit `db.sqlite3`, `media/` or your virtual environment. They are ignored in `resume_analyzer/.gitignore`.
+---
+
+## Features
+
+- ✅ Upload multiple resumes (stored at `media/resumes`)
+- ✅ Simple dashboard and upload view in the `analyzer` app
+- ✅ Extensible analysis pipeline (add NLP/parsers)
+
+---
+
+## Architecture
+
+High-level flow:
+
+```mermaid
+flowchart LR
+  U[User uploads resume] --> S[Server (Django)]
+  S --> FS[Save to media/resumes]
+  S --> P[Parser / Analyzer]
+  P --> DB[Store extracted data]
+  DB --> UI[Dashboard / Download]
+```
+
+---
+
+## Environment & Secrets
+
+- This repo previously had a sensitive key in `resume_analyzer/.env`. DO NOT commit secrets.
+- Keep your API keys in `resume_analyzer/.env` and add `.env` to your global `.gitignore` if necessary.
+- If a secret was accidentally committed, rotate it immediately and follow GitHub's secret scanning guidance.
+
+---
+
+## Development
+
+- Run tests (if present):
+
+```powershell
+cd resume_analyzer
+python manage.py test
+```
+
+- Lint/format with your preferred tools (Black/flake8).
+
+---
 
 ## Deploying
-- For production, use a proper WSGI server (Gunicorn, uWSGI) behind a reverse proxy. Configure static/media serving and secure environment variables in the host.
+
+- For production use: Gunicorn + Nginx, set `DEBUG=False` and provide secure environment variables.
+
+---
 
 ## Contributing
-- Open issues or PRs for bugs and feature requests.
+
+- Open issues or PRs. For significant changes, open an issue first to discuss.
+
+---
 
 ## License
-- MIT
 
-## Contact
-- Project maintainer: SAURABH (original repo owner)
+MIT
+
+---
+
+If you want I can: add a demo GIF, include screenshots from `resume_analyzer/media`, or generate a CI badge — tell me which.
